@@ -1,7 +1,8 @@
+-- QR Reader plugin for Corona SDK
+-- Plugin developed by Andrew Wahid
 local qrscanner = require "plugin.qrreader"
 local widget = require( "widget" )
-
-
+--
 display.setDefault( "background", 0.46, 0.513, 0.588, 1 )
 local layoutTable = {}
 local radioGroup = display.newGroup()
@@ -9,7 +10,6 @@ local radioGroup = display.newGroup()
 local currentSelectedScanType = "all"
 local scanTypes = {"all", "one-d", "qrcode", "product", "data-matrix"}
 function onSelectRadioButton(event)
-	print(event.target.id)
 	currentSelectedScanType = event.target.id
 end
 --
@@ -26,7 +26,7 @@ layoutTable["scanTextField"].placeholder = "Scan Title"
 --
 local currentX = display.contentCenterX-115
 for i=1, #scanTypes do
-	layoutTable["scan"..scanTypes[i].."Check"] = widget.newSwitch(
+	layoutTable["scanFormat#"..i] = widget.newSwitch(
 	{
 		x = currentX,
 		y = display.contentCenterY-125,
@@ -37,7 +37,7 @@ for i=1, #scanTypes do
 	layoutTable["scanTypeText#"..i] = display.newText(scanTypes[i], currentX, display.contentCenterY-150, native.systemFont, 11)
 	layoutTable["scanTypeText#"..i]:setFillColor(0, 0, 0)
 	--
-	radioGroup:insert(layoutTable["scan"..scanTypes[i].."Check"])
+	radioGroup:insert(layoutTable["scanFormat#"..i])
 	currentX = currentX + 60
 end
 --
@@ -65,9 +65,7 @@ layoutTable["scanResultBox"] = native.newTextBox(display.contentCenterX, display
 layoutTable["scanResultBox"].isEditable = false
 --
 function scanListener( event )
-	layoutTable["scanText"].text = "scanned!!!"
 	local eventText = "SCAN RESULT ("..os.date("%c").."):\nEvent error: "..tostring(event.isError).."\nEvent State: "..tostring(event.state).."\nEvent Result: "..tostring(event.result)..""
-	print(eventText)
 	layoutTable["scanResultBox"].text = eventText
 end
 --
@@ -85,4 +83,3 @@ layoutTable["scanButton"]:addEventListener("touch", function(event)
 		beepEnabled = p_beepEnabled,
 	} )
 end)
-
