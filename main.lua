@@ -1,6 +1,6 @@
 -- QR Reader plugin for Corona SDK
 -- Plugin developed by Andrew Wahid
-local qrscanner = require "plugin.qrreader"
+local qrreader = require "plugin.qrreader"
 local widget = require( "widget" )
 --
 display.setDefault( "background", 0.46, 0.513, 0.588, 1 )
@@ -75,7 +75,7 @@ layoutTable["scanButton"]:addEventListener("touch", function(event)
 	local p_useFrontCamera = layoutTable["scanFrontCameraCheck"].isOn
 	local p_beepEnabled = layoutTable["scanBeepCheck"].isOn
 	local p_scanType = currentSelectedScanType
-	qrscanner.startScan( {
+	qrreader.startScan( {
 		onScanComplete = scanListener,
 		title = p_scanTitle,
 		useFrontCamera = p_useFrontCamera,
