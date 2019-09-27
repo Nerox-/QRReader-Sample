@@ -27,7 +27,6 @@ settings =
 		["plugin.qrreader"] =
         	{
 			publisherId = "com.andrewwahid",
-			supportedPlatforms = { android = true },
         	},
 	},
 }
