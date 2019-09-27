@@ -1,24 +1,33 @@
---
--- For more information on build.settings see the Corona Build Guide at:
--- http://docs.coronalabs.com/guide/distribution/buildSettings/index.html
---
-
-settings = 
+settings =
 {
-	--[[
 	orientation =
 	{
 		default = "portrait",
-		supported = { "portrait" }
+		supported = { "portrait",},
 	},
-	--]]
+	android =
+	{
+		usesPermissions =
+		{
+			"android.permission.CAMERA",
+		},
+	},
 
 	iphone =
 	{
 		xcassets = "Images.xcassets",
 		plist =
 		{
+			UIStatusBarHidden = false,
 			UILaunchStoryboardName = "LaunchScreen",
 		},
+	},
+	plugins =
+	{
+		["plugin.qrreader"] =
+        	{
+			publisherId = "com.andrewwahid",
+			supportedPlatforms = { android = true },
+        	},
 	},
 }
